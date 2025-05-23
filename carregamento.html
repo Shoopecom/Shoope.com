@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Redirecionando para o pagamento - Shopee</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .shopee-orange {
+      color: #ee4d2d;
+    }
+
+    .shopee-bg-orange {
+      background-color: #ee4d2d;
+    }
+
+    .progress-bar {
+      height: 4px;
+      width: 100%;
+      background-color: #e0e0e0;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background-color: #ee4d2d;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .pulse {
+      animation: pulse 1.5s infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+  <div class="max-w-md w-full bg-white rounded-lg shadow-sm p-8 text-center">
+    <!-- Shopee Logo -->
+    <div class="flex justify-center mb-6">
+      <div class="text-3xl font-bold shopee-orange">Shopee</div>
+    </div>
+
+    <!-- Main Message -->
+    <h1 class="text-3xl md:text-4xl font-bold shopee-orange mb-4">Já é quase seu!</h1>
+
+    <!-- Sub Message -->
+    <p class="text-gray-600 mb-6">
+      Aguarde <span id="countdown" class="font-medium shopee-orange">5</span> segundos para ser redirecionado para o pagamento.
+    </p>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar mb-8">
+      <div id="progress" class="progress-bar-fill" style="width: 0%"></div>
+    </div>
+
+    <!-- Loading Icon -->
+    <div class="pulse">
+      <i class="fas fa-spinner fa-spin text-3xl shopee-orange"></i>
+    </div>
+
+    <!-- Help Text -->
+    <p class="text-sm text-gray-500 mt-6">
+      Se o redirecionamento não funcionar,
+      <a href="checkout.html" class="shopee-orange hover:underline">clique aqui</a>.
+    </p>
+  </div>
+
+  <script>
+    let seconds = 5;
+    const countdownElement = document.getElementById('countdown');
+    const progressElement = document.getElementById('progress');
+    const targetUrl = 'checkout.html';
+
+    const interval = setInterval(() => {
+      seconds--;
+
+      // Atualiza a contagem regressiva
+      countdownElement.textContent = seconds;
+
+      // Atualiza a barra de progresso
+      const percentage = ((5 - seconds) / 5) * 100;
+      progressElement.style.width = `${percentage}%`;
+
+      // Redireciona quando chega a 0
+      if (seconds <= 0) {
+        clearInterval(interval);
+        window.location.href = targetUrl;
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
