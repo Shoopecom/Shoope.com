@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Redirecionamento para Carregamento.html
       setTimeout(() => {
-        window.location.href = "Carregamento.html";
+        window.location.href = "carregamento.html";
       }, 300);
     });
   }
